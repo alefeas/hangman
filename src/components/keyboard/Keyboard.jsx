@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export const Keyboard = ({ chooseLetter, correctLetters, wrongLetters, wordLetters, loading, unique, numberOfErrors, mute, setMute }) => {
+export const Keyboard = ({ chooseLetter, correctLetters, wrongLetters, wordLetters, loading, unique, numberOfErrors, mute }) => {
     const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
     const correctLetterSound = useRef(new Audio('correct-letter.mp3'))
