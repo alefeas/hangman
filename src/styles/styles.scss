@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+* {
+    font-family: 'Russo One', sans-serif;
+}
+body {
+    background-color:rgb(185, 206, 212);
+}
+.game {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+.abs-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.body-part {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.limb {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+}
+.body {
+    position: absolute;
+    left: 33.5%;
+    top: 83px;
+    z-index: -1;
+    width: 50px;
+    height: 250px;
+}
+.head {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.head .neck {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -8px;
+    width: 10px;
+    height: 8px;
+}
+.limb {
+    top: 0;
+    position: absolute;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    z-index: 2;
+}
+.leg-limb {
+    height: 60px;
+    background-color: black;
+}
+.torso {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 58px;
+    width: 50px;
+    height: 80px;
+    border-radius: 30px 30px 50px 50px;
+    background-color: black;
+}
+.torso .left-arm {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    top: 2px;
+    left: -10px;
+    transform: rotateZ(10deg);
+    background-color: black;
+}
+.torso .left-arm .forearm {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    top: 40px;
+    transform: rotateZ(0deg);
+}
+.torso .right-arm {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    right: -10px;
+    transform: rotateZ(-10deg);
+    background-color: black
+}
+.torso .right-arm .forearm {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    top: 40px;
+    transform: rotateZ(0deg);
+}
+.abdomen {
+    position: absolute;
+    background-color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 120px;
+    width: 50px;
+    height: 30px;
+    border-radius: 30px 30px 50px 50px;
+    background-color: black;
+}
+.abdomen .left-foot {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    height: 60px;
+    background-color: black;
+    top: 60%;
+    left: 0;
+}
+.abdomen .left-foot .lower-leg {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    height: 60px;
+    background-color: black;
+    top: 45px;
+}
+.abdomen .right-foot {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    height: 60px;
+    background-color: black;
+    top: 60%;
+    right: 0;
+}
+.abdomen .right-foot .lower-leg {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    transform-origin: 50% 0;
+    z-index: 2;
+    top: 0;
+    height: 50px;
+    width: 14px;
+    background-color: black;
+    border-radius: 10px;
+    transform-origin: 50% 5px;
+    height: 60px;
+    background-color: black;
+    top: 45px;
+}
+.wave .left-arm {
+    animation: wave-arm 5s infinite;
+}
+.wave .left-arm .forearm {
+    animation: wave-forearm 5s infinite;
+}
+.keyboard {
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 auto;
+}
+.key {
+    background-color: rgb(240, 240, 240);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+}
+.lettersContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px;
+    .letter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid black;
+        width: 20px;
+        height: 25px;
+    }
+}
+.correctLetter {
+    background-color: rgb(79, 158, 79);
+}
+.wrongLetter {
+    background-color: rgb(185, 96, 96);
+}
+.nonClickable {
+    cursor: default;
+}
+.gallow {
+    width: 150px;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 180px;
+    img {
+        width: 150px;
+    }
+}
+.playAgainButton {
+    margin-top: 20px;
+    margin: 15px auto 0 auto;
+}
+.lobby {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    gap: 10px;
+    .title {
+        margin: 0;
+        font-size: 50px;
+    }
+}
+.footer {
+    font-size: 14px;
+    margin: 20px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.tutorial {
+    min-height: 90vh;
+    div {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        text-align: justify;
+        align-items: center;
+        justify-content: center;
+        h3 {
+            margin: 100px 0 15px 0;
+            font-size: 36px;
+        }
+        p {
+            margin: 0 auto 90px auto;
+            width: 600px;
+        }
+    }
+}
+.finishMessage {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+}
+.buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+.soundButton {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.exitIcon {
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 60px;
+}
+.customButton {
+    background: transparent;
+    border: 1px solid black;
+    padding: 2.5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.soundIcon {
+    width: 60px;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+//LOADER
+
+.loader {
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.stick1, .stick2, .stick3, .stick4 {
+    background-color: #333;
+    width: 50px;
+    height: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    -webkit-animation: sk-cubemove 1.8s infinite linear;
+    animation: sk-cubemove 1.8s infinite linear;
+}
+
+.stick1 {
+    background-color: #e74c3c;
+}
+
+.stick2 {
+    background-color: #3498db;
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.stick3 {
+    background-color: #2ecc71;
+    -webkit-animation-delay: -1.35s;
+    animation-delay: -1.35s;
+}
+
+.stick4 {
+    background-color: #f1c40f;
+    -webkit-animation-delay: -.45s;
+    animation-delay: -.45s;
+}
+
+@-webkit-keyframes sk-cubemove {
+    25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.9) }
+    50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+    75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.9) }
+    100% { -webkit-transform: rotate(-360deg) }
+}
+
+@keyframes sk-cubemove {
+    25% { 
+    transform: translateX(42px) rotate(-90deg) scale(0.9);
+    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.9);
+    } 50% { 
+    transform: translateX(42px) translateY(42px) rotate(-179deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+    } 50.1% { 
+    transform: translateX(42px) translateY(42px) rotate(-180deg);
+    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+    } 75% { 
+    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.9);
+    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.9);
+    } 100% { 
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    }
+}
+
+//WEB RESPONSIVE DESIGN
+
+@media screen and (max-width: 650px) {
+    .tutorial {
+        div {
+            p {
+                width: 90vw;
+            }
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    .keyboard {
+        width: 90vw;
+        max-width: 380px;
+        gap: 7.5px;
+    }
+    .key {
+        width: 30px;
+        height: 30px;
+    }
+}

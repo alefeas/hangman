@@ -1,6 +1,33 @@
-export const Keyboard = ({ chooseLetter, correctLetters, wrongLetters, wordLetters, loading, unique, numberOfErrors }) => {
+import { useEffect, useRef } from "react"
+
+export const Keyboard = ({ chooseLetter, correctLetters, wrongLetters, wordLetters, loading, unique, numberOfErrors, mute, setMute }) => {
     const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
+    const correctLetterSound = useRef(new Audio('correct-letter.mp3'))
+    const wrongLetterSound = useRef(new Audio('wrong-letter.mp3'))
+    const winSound = useRef(new Audio('win.mp3'))
+    const defeatSound = useRef(new Audio('defeat.mp3'))
+    
+    useEffect(() => {
+        if (mute) {
+            return
+        } else if (correctLetters.length === unique.length && unique.length > 0) {
+            winSound.current.play()
+        } else if (correctLetters.length > 0) {
+            correctLetterSound.current.play()
+        }
+    }, [correctLetters])
+    
+    useEffect(() => {
+        if (mute) {
+            return
+        } else if (wrongLetters.length >= numberOfErrors) {
+            defeatSound.current.play()
+        } else if (wrongLetters.length > 0) {
+            wrongLetterSound.current.play()
+        }
+    }, [wrongLetters])
+    
     return (
         <div className='keyboard'>
             {alphabet.map(item => 
@@ -17,7 +44,7 @@ export const Keyboard = ({ chooseLetter, correctLetters, wrongLetters, wordLette
                                 {item.toUpperCase()} 
                             </div>
                         )
-                    }else {
+                    } else {
                         return (
                         <div className="key" onClick={() => chooseLetter({item})}>
                             {item.toUpperCase()}

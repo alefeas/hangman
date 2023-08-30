@@ -3,8 +3,14 @@ import axios from "axios";
 import { Loader } from "../loader/Loader.jsx";
 import { HangedMan } from "../hangedMan/HangedMan.jsx";
 import { Keyboard } from "../keyboard/Keyboard.jsx";
+import { Lobby } from "../lobby/Lobby.jsx";
+import { ExitGame } from "../exitGame/ExitGame.jsx";
+import { MusicButton } from "../musicButton/MusicButton.jsx";
+import { useLocalStorage } from "../../hooks/useLocalStorage.js"
 
 export const Game = () => {
+    const [mute, setMute] = useLocalStorage('mute', false)
+    const [playing, setPlaying] = useState(false)
     const [word, setWord] = useState('')
     const [wordLetters, setWordLetters] = useState([])
     const [unique, setUnique] = useState([])
@@ -26,19 +32,19 @@ export const Game = () => {
         }
         setLoading(false)
     }
-
+    
     const start = () => {
+        setPlaying(true)
         setWrongLetters([])
         setCorrectLetters([])
         fetchWord(apiUrl)
     }
-    
+
     const chooseLetter = (letter) => {
         if (wordLetters.includes(letter.item) && !correctLetters.includes(letter.item)) {
-            setCorrectLetters(correctLetters + letter.item)
+            setCorrectLetters(oldArray => [...oldArray, letter.item])
         } else if (!wrongLetters.includes(letter.item) && !correctLetters.includes(letter.item)) {
             setWrongLetters(oldArray => [...oldArray, letter.item])
-            console.log(wrongLetters);
         } 
     }
 
@@ -51,41 +57,56 @@ export const Game = () => {
     }, [wordLetters])
 
     return (
-        <div>
+        <div className="game">
             {
-                !loading ?
+                !playing ?
+                <Lobby start={start}/>
+                : 
                 <>
-                    <div>
-                        <button onClick={start}>PLAY</button>
-                        {word}
-                    </div>
-                    <div className="lettersContainer">
-                        {wordLetters.map((item) =>  {
-                            return (
-                                <span className="letter">{correctLetters.includes(item) ? item.toUpperCase() : ''}</span>
-                            )
-                        }
-                        )}
-                    </div>
-                    <Keyboard chooseLetter={chooseLetter} wrongLetters={wrongLetters} numberOfErrors={numberOfErrors} correctLetters={correctLetters} wordLetters={wordLetters} loading={loading} unique={unique}/>
+                <div className="buttonsContainer">
+                    <ExitGame setPlaying={setPlaying}/>
+                    <MusicButton mute={mute} setMute={setMute}/>
+                </div>
+                {
+                    !loading ?
                     <>
-                        {
-                            wrongLetters.length >= numberOfErrors ? 
-                            <span>You lose!</span>
-                            : <></>
-                        }
+                        <div className="gallow">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1428/1428300.png" alt="" />
+                            <HangedMan wrongLetters={wrongLetters}/>
+                        </div>
+                        <div className="lettersContainer">
+                            {wordLetters.map((item) =>  {
+                                return (
+                                    <span className="letter">{correctLetters.includes(item) ? item.toUpperCase() : ''}</span>
+                                )
+                            }
+                            )}
+                        </div>
+                        <Keyboard mute={mute} chooseLetter={chooseLetter} wrongLetters={wrongLetters} numberOfErrors={numberOfErrors} correctLetters={correctLetters} wordLetters={wordLetters} loading={loading} unique={unique}/>
+                        <>
+                            {
+                                wrongLetters.length >= numberOfErrors ? 
+                                <div className="finishMessage">
+                                    <span>You lost!</span>
+                                    <span>Correct word: {word}</span>
+                                    <button className="playAgainButton customButton" onClick={start}>PLAY AGAIN</button>
+                                </div>
+                                : <></>
+                            }
+                        </>
+                            {
+                                correctLetters.length === unique.length && unique.length > 0 ?
+                                <div className="finishMessage">
+                                    <span>Correct!</span>
+                                    <button className="playAgainButton customButton" onClick={start}>PLAY AGAIN</button>
+                                </div>
+                                : <></>
+                            }
                     </>
-                        {
-                            correctLetters.length === unique.length ?
-                            <span>Correct!</span>
-                            : <></>
-                        }
-                    <HangedMan wrongLetters={wrongLetters}/>
+                : <Loader/>
+                }
                 </>
-            : <Loader/>
-        }
+            }
         </div>
     )
 }
-
-/* className={wrongLetters.includes({item}) ? 'wrongLetter key' : 'correctLetter key'}  */

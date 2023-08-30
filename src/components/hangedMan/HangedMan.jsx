@@ -3,7 +3,7 @@ import React from 'react'
 
 export const HangedMan = ({wrongLetters}) => {
     return (
-        <div className="animakuz-container gradient-bg-dark">
+        <div>
         <div className="body wave">
             <div className={wrongLetters.length >= 1 ? "head" : ''}>
             <div className="neck"></div>
@@ -16,8 +16,8 @@ export const HangedMan = ({wrongLetters}) => {
                 <div className="forearm"></div>   
             </div>
             </div>
-            <div className={wrongLetters.length >= 5 ? "abdomen" : ''}>
-                <div className="left-foot">
+            <div className={wrongLetters.length >= 2 ? "abdomen" : ''}>
+                <div className={wrongLetters.length >= 5 ? "left-foot" : ''}>
                     <div className="lower-leg"></div>
                 </div>
                 <div className={wrongLetters.length >= 6 ? "right-foot" : ''}>
